@@ -1,0 +1,184 @@
+---
+const img = "https://images.unsplash.com/photo-1723832348105-2e69f948135a";
+const src = (w: number) => `${img}?auto=format&fit=crop&w=${w}&q=80`;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__media">
+    <img
+      src={src(1600)}
+      srcset={`${src(900)} 900w, ${src(1400)} 1400w, ${src(2000)} 2000w`}
+      sizes="100vw"
+      alt="A grand reception hall set with long tables, gold chiavari chairs and chandeliers glowing under string lights"
+      fetchpriority="high"
+      decoding="async"
+      width="2000"
+      height="2500"
+    />
+    <div class="hero__scrim"></div>
+  </div>
+
+  <div class="hero__inner wrap">
+    <p class="kicker on-navy hero__kicker reveal">Achimota · Accra · Ghana</p>
+    <h1 id="hero-title" class="hero__title reveal" style="--reveal-delay:90ms">
+      Where every event<br />feels <span class="gilt">Grand.</span>
+    </h1>
+    <p class="hero__lede reveal" style="--reveal-delay:180ms">
+      A serene, versatile venue for weddings, conferences, church programs and
+      celebrations, with the décor, rentals and team to make the day effortless.
+    </p>
+    <div class="hero__actions reveal" style="--reveal-delay:260ms">
+      <a href="#contact" class="btn btn--gold">
+        Book a tour <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#gallery" class="btn btn--ghost">See the space</a>
+    </div>
+
+    <div class="hero__meta reveal" style="--reveal-delay:360ms">
+      <span class="hero__meta-dot" aria-hidden="true"></span>
+      Kingsby, adjacent Hof Vilac International School
+    </div>
+  </div>
+
+  <a href="#about" class="hero__scroll" aria-label="Scroll to learn more">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    color: var(--on-navy);
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    transform: scale(1.04);
+    animation: heroZoom 18s var(--ease-out) forwards;
+  }
+  @keyframes heroZoom {
+    to {
+      transform: scale(1);
+    }
+  }
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        oklch(0.17 0.04 258 / 0.72) 0%,
+        oklch(0.17 0.04 258 / 0.3) 32%,
+        oklch(0.17 0.04 258 / 0.55) 72%,
+        oklch(0.15 0.035 258 / 0.92) 100%
+      ),
+      linear-gradient(
+        90deg,
+        oklch(0.17 0.04 258 / 0.7) 0%,
+        oklch(0.17 0.04 258 / 0.1) 60%
+      );
+  }
+
+  .hero__inner {
+    padding-bottom: clamp(4rem, 2rem + 8vw, 8rem);
+    padding-top: 9rem;
+  }
+  .hero__kicker {
+    margin-bottom: 1.4rem;
+  }
+  .hero__title {
+    font-size: var(--step-5);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    text-shadow: 0 2px 30px oklch(0.1 0.03 258 / 0.4);
+  }
+  .hero__title .gilt {
+    font-weight: 500;
+  }
+  .hero__lede {
+    margin-top: 1.6rem;
+    max-width: 46ch;
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--on-navy-soft);
+    font-weight: 400;
+  }
+  .hero__actions {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .hero__meta {
+    margin-top: 2.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--on-navy-soft);
+    padding-top: 1.6rem;
+    border-top: 1px solid oklch(0.96 0.012 86 / 0.16);
+    max-width: max-content;
+  }
+  .hero__meta-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-400);
+    box-shadow: 0 0 0 4px oklch(0.84 0.115 84 / 0.22);
+    flex: none;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    right: clamp(1.25rem, 3vw, 3rem);
+    bottom: clamp(1.5rem, 3vw, 2.5rem);
+    width: 26px;
+    height: 44px;
+    border: 1.5px solid oklch(0.96 0.012 86 / 0.4);
+    border-radius: 999px;
+    display: grid;
+    place-items: start center;
+    padding-top: 7px;
+  }
+  .hero__scroll span {
+    width: 4px;
+    height: 9px;
+    border-radius: 4px;
+    background: var(--gold-400);
+    animation: scrollDot 1.8s var(--ease-out) infinite;
+  }
+  @keyframes scrollDot {
+    0% { transform: translateY(0); opacity: 0; }
+    30% { opacity: 1; }
+    70% { transform: translateY(12px); opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @media (max-width: 640px) {
+    .hero__scroll {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__media img {
+      animation: none;
+      transform: none;
+    }
+    .hero__scroll span {
+      animation: none;
+    }
+  }
+</style>

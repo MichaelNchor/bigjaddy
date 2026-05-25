@@ -1,0 +1,153 @@
+---
+const services = [
+  {
+    t: "The Venue",
+    d: "A versatile, serene event space that adapts to your guest list and your vision.",
+    icon: `<path d="M3 21h18M5 21V9l7-5 7 5v12M9.5 21v-5h5v5"/>`,
+  },
+  {
+    t: "Décor & Setup",
+    d: "Styling, draping and setup tailored to your theme, so the room feels yours.",
+    icon: `<path d="M12 3c.6 3.4 2.8 5.6 6.2 6.2-3.4.6-5.6 2.8-6.2 6.2-.6-3.4-2.8-5.6-6.2-6.2C9.2 8.6 11.4 6.4 12 3Z"/><path d="M18.5 16.5c.25 1.3 1 2.05 2.3 2.3-1.3.25-2.05 1-2.3 2.3-.25-1.3-1-2.05-2.3-2.3 1.3-.25 2.05-1 2.3-2.3Z"/>`,
+  },
+  {
+    t: "Rentals",
+    d: "Chairs, tables and canopies ready to go, in the counts and styles you need.",
+    icon: `<path d="M4 10h16M6.5 10 8 19M17.5 10 16 19M7 10V6h10v4"/>`,
+  },
+  {
+    t: "Catering",
+    d: "On-demand menus through trusted catering partners, from light bites to full service.",
+    icon: `<path d="M3 18.5h18M5 18.5a7 7 0 0 1 14 0M12 11.5V8.5m-1.2 0h2.4"/>`,
+  },
+  {
+    t: "Photography & Video",
+    d: "Professional coverage that holds on to the moments long after the day ends.",
+    icon: `<path d="M4 8.5h3L8.4 6.5h7.2L17 8.5h3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.1"/>`,
+  },
+  {
+    t: "Sound & Lighting",
+    d: "Optional sound and lighting to set the mood, from soft and warm to full celebration.",
+    icon: `<path d="M9 17.5V6l10-2v11.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/>`,
+  },
+];
+---
+
+<section id="services" class="services section">
+  <div class="wrap">
+    <div class="services__head">
+      <h2 class="services__title reveal">
+        Everything your<br />day needs, <span class="gilt">in one place.</span>
+      </h2>
+      <p class="services__intro reveal" style="--reveal-delay:90ms">
+        Take the room on its own or hand us the whole checklist. Mix and match
+        what you need; we will take care of the rest.
+      </p>
+    </div>
+
+    <ul class="services__grid">
+      {services.map((s, i) => (
+        <li class="service reveal" style={`--reveal-delay:${i * 70}ms`}>
+          <span class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon} />
+          </span>
+          <h3 class="service__title">{s.t}</h3>
+          <p class="service__desc">{s.d}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    background:
+      radial-gradient(120% 80% at 85% -10%, oklch(0.29 0.07 257) 0%, transparent 55%),
+      var(--navy-900);
+    color: var(--on-navy);
+  }
+  .services__head {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(1.5rem, 0.5rem + 4vw, 4rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  }
+  .services__title {
+    font-size: var(--step-4);
+    color: var(--on-navy);
+  }
+  .services__intro {
+    color: var(--on-navy-soft);
+    font-size: var(--step-0);
+    max-width: 40ch;
+  }
+
+  .services__grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: oklch(0.84 0.115 84 / 0.18);
+    border: 1px solid oklch(0.84 0.115 84 / 0.18);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .service {
+    background: var(--navy-900);
+    padding: clamp(1.6rem, 1.2rem + 1.5vw, 2.6rem);
+    transition: background-color 0.5s var(--ease-out);
+    position: relative;
+  }
+  .service:hover {
+    background: oklch(0.25 0.06 257);
+  }
+  .service__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--gold-400);
+    border: 1px solid oklch(0.84 0.115 84 / 0.32);
+    border-radius: 50%;
+    margin-bottom: 1.3rem;
+    transition: transform 0.5s var(--ease-out), border-color 0.4s ease;
+  }
+  .service__icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .service:hover .service__icon {
+    transform: translateY(-3px);
+    border-color: var(--gold-400);
+  }
+  .service__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-2);
+    color: var(--on-navy);
+    margin-bottom: 0.6rem;
+  }
+  .service__desc {
+    color: var(--on-navy-soft);
+    font-size: var(--step--1);
+    line-height: 1.6;
+    max-width: 34ch;
+  }
+
+  @media (max-width: 860px) {
+    .services__head {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

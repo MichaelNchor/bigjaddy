@@ -1,0 +1,109 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "BIG JADDY ENT Event Center — Where every event feels Grand",
+  description = "A versatile, serene event center in Achimota, Accra for weddings, conferences, church programs and celebrations. Décor, rentals, catering, photography, sound and lighting, all in one place.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1a2236" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1723832348105-2e69f948135a?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <span id="top" aria-hidden="true"></span>
+    <slot />
+
+    <script>
+      // Staggered scroll reveals
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const items = document.querySelectorAll<HTMLElement>(".reveal");
+      if (prefersReduced || !("IntersectionObserver" in window)) {
+        items.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+        items.forEach((el) => io.observe(el));
+      }
+
+      // Header: transparent on hero, solid when scrolled
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const onScroll = () => {
+        if (!header) return;
+        const scrolled = window.scrollY > 40;
+        header.classList.toggle("is-solid", scrolled);
+        header.dataset.variant = scrolled ? "light" : "dark";
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Mobile nav toggle
+      const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+      const nav = document.querySelector<HTMLElement>("#primary-nav");
+      navToggle?.addEventListener("click", () => {
+        const open = header?.classList.toggle("nav-open");
+        navToggle.setAttribute("aria-expanded", String(!!open));
+      });
+      nav?.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          header?.classList.remove("nav-open");
+          navToggle?.setAttribute("aria-expanded", "false");
+        })
+      );
+    </script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -3rem;
+        z-index: 200;
+        background: var(--navy-900);
+        color: var(--on-navy);
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        transition: top 0.2s ease;
+      }
+      .skip-link:focus {
+        top: 1rem;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+---
+const img = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622";
+const src = (w: number) => `${img}?auto=format&fit=crop&w=${w}&q=80`;
+
+const highlights = [
+  {
+    n: "01",
+    t: "A serene, central setting",
+    d: "Tucked in Achimota, easy for your guests to reach, calm enough to feel special.",
+  },
+  {
+    n: "02",
+    t: "A team that handles it",
+    d: "From first walk-through to the final teardown, we keep the day running quietly behind the scenes.",
+  },
+  {
+    n: "03",
+    t: "Packages that flex",
+    d: "Take the room on its own, or add décor, rentals, catering and coverage as you need them.",
+  },
+];
+---
+
+<section id="about" class="intro section">
+  <div class="wrap intro__grid">
+    <div class="intro__copy">
+      <p class="kicker reveal">About the venue</p>
+      <h2 class="intro__title reveal" style="--reveal-delay:80ms">
+        We turn moments into<br />
+        <span class="gilt">memories</span> worth keeping.
+      </h2>
+      <p class="intro__body reveal" style="--reveal-delay:140ms">
+        BIG JADDY ENT Event Center is a spacious, well-equipped venue for the
+        occasions that matter most. Whether you are hosting an intimate gathering
+        or a large celebration, we bring the environment, the professionalism and
+        the support to make it smooth, stylish and stress-free.
+      </p>
+
+      <ul class="intro__highlights reveal" style="--reveal-delay:200ms">
+        {highlights.map((h) => (
+          <li>
+            <span class="intro__num">{h.n}</span>
+            <div>
+              <h3 class="intro__h">{h.t}</h3>
+              <p>{h.d}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <figure class="intro__figure reveal" style="--reveal-delay:120ms">
+      <img
+        src={src(900)}
+        srcset={`${src(640)} 640w, ${src(900)} 900w, ${src(1200)} 1200w`}
+        sizes="(max-width: 900px) 90vw, 40vw"
+        alt="A long banquet table dressed with wine glasses and a vivid floral centerpiece in warm afternoon light"
+        loading="lazy"
+        decoding="async"
+        width="1200"
+        height="900"
+      />
+      <figcaption>
+        <span class="gilt">“</span>Where every event feels Grand.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .intro {
+    background: var(--ivory);
+  }
+  .intro__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2.5rem, 1rem + 6vw, 6rem);
+    align-items: center;
+  }
+  .intro__title {
+    font-size: var(--step-4);
+    margin-top: 1.3rem;
+    color: var(--ink);
+  }
+  .intro__body {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+  .intro__highlights {
+    list-style: none;
+    padding: 0;
+    margin-top: 2.6rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .intro__highlights li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.1rem;
+    align-items: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .intro__num {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--gold-600);
+    line-height: 1;
+    font-feature-settings: "lnum";
+  }
+  .intro__h {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--step-0);
+    color: var(--ink);
+    letter-spacing: 0;
+  }
+  .intro__highlights p {
+    margin-top: 0.3rem;
+    color: var(--muted);
+    font-size: var(--step--1);
+    max-width: 42ch;
+  }
+
+  .intro__figure {
+    position: relative;
+    margin: 0;
+  }
+  .intro__figure img {
+    width: 100%;
+    height: clamp(26rem, 20rem + 22vw, 38rem);
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lift);
+  }
+  .intro__figure::before {
+    content: "";
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border: 1px solid var(--gold-400);
+    border-radius: var(--radius-lg);
+    z-index: -1;
+  }
+  .intro__figure figcaption {
+    position: absolute;
+    left: clamp(1rem, 3%, 1.5rem);
+    bottom: clamp(1rem, 3%, 1.5rem);
+    right: clamp(1rem, 10%, 4rem);
+    background: oklch(0.17 0.04 258 / 0.62);
+    backdrop-filter: blur(8px);
+    color: var(--on-navy);
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-0);
+    border: 1px solid oklch(0.84 0.115 84 / 0.3);
+  }
+  .intro__figure figcaption .gilt {
+    font-size: 1.6em;
+    line-height: 0;
+    margin-right: 0.1em;
+    vertical-align: -0.3em;
+  }
+
+  @media (max-width: 860px) {
+    .intro__grid {
+      grid-template-columns: 1fr;
+    }
+    .intro__figure {
+      order: -1;
+    }
+    .intro__figure::before {
+      inset: 10px -10px -10px 10px;
+    }
+  }
+</style>

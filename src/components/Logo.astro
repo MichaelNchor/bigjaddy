@@ -1,0 +1,117 @@
+---
+/**
+ * Recreated BIG JADDY mark — clean navy shield, gold rim, minimal skyline,
+ * gold "BJ" monogram. Swap for the official transparent file when available.
+ */
+interface Props {
+  variant?: "light" | "dark"; // light = on ivory, dark = on navy
+  showWordmark?: boolean;
+  class?: string;
+}
+const { variant = "light", showWordmark = true, class: klass = "" } = Astro.props;
+const uid = Math.random().toString(36).slice(2, 8);
+const wordmarkColor = variant === "dark" ? "var(--on-navy)" : "var(--navy-800)";
+---
+
+<a href="#top" class={`logo ${klass}`} aria-label="BIG JADDY Event Center, home">
+  <svg
+    class="logo__mark"
+    viewBox="0 0 100 110"
+    role="img"
+    aria-hidden="true"
+    fill="none"
+  >
+    <defs>
+      <linearGradient id={`shield-${uid}`} x1="50" y1="6" x2="50" y2="106" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="oklch(0.34 0.075 256)" />
+        <stop offset="1" stop-color="oklch(0.2 0.05 258)" />
+      </linearGradient>
+      <linearGradient id={`gold-${uid}`} x1="50" y1="14" x2="50" y2="96" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="oklch(0.9 0.1 88)" />
+        <stop offset="0.5" stop-color="oklch(0.82 0.14 82)" />
+        <stop offset="1" stop-color="oklch(0.68 0.12 72)" />
+      </linearGradient>
+    </defs>
+
+    <!-- shield body -->
+    <path
+      d="M20 6 H80 A12 12 0 0 1 92 18 V54 C92 78 74 96 50 106 C26 96 8 78 8 54 V18 A12 12 0 0 1 20 6 Z"
+      fill={`url(#shield-${uid})`}
+      stroke={`url(#gold-${uid})`}
+      stroke-width="3"
+    />
+    <!-- inner hairline -->
+    <path
+      d="M22 13 H78 A7 7 0 0 1 85 20 V54 C85 75 69 91 50 100 C31 91 15 75 15 54 V20 A7 7 0 0 1 22 13 Z"
+      stroke="oklch(0.82 0.14 82 / 0.55)"
+      stroke-width="1"
+    />
+
+    <!-- minimal skyline -->
+    <g fill={`url(#gold-${uid})`}>
+      <rect x="34" y="30" width="5" height="11" rx="0.6" />
+      <rect x="40.5" y="25" width="4" height="16" rx="0.6" />
+      <rect x="46" y="32" width="5" height="9" rx="0.6" />
+      <rect x="52.5" y="27" width="4" height="14" rx="0.6" />
+      <rect x="58" y="33" width="5" height="8" rx="0.6" />
+    </g>
+    <rect x="33" y="43" width="34" height="1.4" rx="0.7" fill="oklch(0.82 0.14 82 / 0.85)" />
+
+    <!-- BJ monogram -->
+    <text
+      x="50"
+      y="83"
+      text-anchor="middle"
+      font-family="'Bodoni Moda', Georgia, serif"
+      font-weight="700"
+      font-size="34"
+      letter-spacing="-2"
+      fill={`url(#gold-${uid})`}
+    >BJ</text>
+  </svg>
+
+  {showWordmark && (
+    <span class="logo__word" style={`color:${wordmarkColor}`}>
+      <span class="logo__name">BIG JADDY</span>
+      <span class="logo__sub">Event Center</span>
+    </span>
+  )}
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    line-height: 1;
+  }
+  .logo__mark {
+    width: clamp(2.1rem, 1.8rem + 1vw, 2.6rem);
+    height: auto;
+    flex: none;
+    filter: drop-shadow(0 4px 10px oklch(0.2 0.04 258 / 0.18));
+  }
+  .logo__word {
+    display: flex;
+    flex-direction: column;
+    gap: 0.18em;
+  }
+  .logo__name {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: clamp(1rem, 0.92rem + 0.4vw, 1.2rem);
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+  }
+  .logo__sub {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+  }
+  :global(.site-header[data-variant="dark"]) .logo__sub {
+    color: var(--gold-400);
+  }
+</style>
