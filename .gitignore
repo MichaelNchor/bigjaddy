@@ -2,9 +2,6 @@
 dist/
 .astro/
 
-# stray Next.js build artifacts (not part of this project)
-.next/
-
 # dependencies
 node_modules/
 

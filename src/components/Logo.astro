@@ -1,72 +1,98 @@
 ---
 /**
- * Recreated BIG JADDY mark — clean navy shield, gold rim, minimal skyline,
- * gold "BJ" monogram. Swap for the official transparent file when available.
+ * BIG JADDY mark — faithful SVG recreation of the real logo: royal-blue shield
+ * with gold rim, skyline (rotunda + arcade, towers, gear), the gold "BJ"
+ * monogram, and the hammer. Self-contained colors so it reads on any background.
  */
 interface Props {
-  variant?: "light" | "dark"; // light = on ivory, dark = on navy
+  variant?: "light" | "dark"; // controls only the wordmark text color
   showWordmark?: boolean;
   class?: string;
 }
 const { variant = "light", showWordmark = true, class: klass = "" } = Astro.props;
 const uid = Math.random().toString(36).slice(2, 8);
+
+// 8 gear teeth around (131,46)
+const teeth = Array.from({ length: 8 }, (_, i) => {
+  const a = (i * 45 * Math.PI) / 180;
+  const cx = 131 + Math.cos(a) * 12;
+  const cy = 46 + Math.sin(a) * 12;
+  return {
+    x: +(cx - 3).toFixed(1),
+    y: +(cy - 3).toFixed(1),
+    cx: +cx.toFixed(1),
+    cy: +cy.toFixed(1),
+    rot: i * 45,
+  };
+});
 ---
 
 <a href="#top" class={`logo ${klass}`} data-variant={variant} aria-label="BIG JADDY Event Center, home">
-  <svg
-    class="logo__mark"
-    viewBox="0 0 100 110"
-    role="img"
-    aria-hidden="true"
-    fill="none"
-  >
+  <svg class="logo__mark" viewBox="0 0 200 232" role="img" aria-hidden="true">
     <defs>
-      <linearGradient id={`shield-${uid}`} x1="50" y1="6" x2="50" y2="106" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="oklch(0.34 0.075 256)" />
-        <stop offset="1" stop-color="oklch(0.2 0.05 258)" />
+      <linearGradient id={`blue-${uid}`} x1="100" y1="50" x2="100" y2="228" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#2c63cc" />
+        <stop offset="1" stop-color="#15397f" />
       </linearGradient>
-      <linearGradient id={`gold-${uid}`} x1="50" y1="14" x2="50" y2="96" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="oklch(0.9 0.1 88)" />
-        <stop offset="0.5" stop-color="oklch(0.82 0.14 82)" />
-        <stop offset="1" stop-color="oklch(0.68 0.12 72)" />
+      <linearGradient id={`hole-${uid}`} x1="100" y1="80" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#173b86" />
+        <stop offset="1" stop-color="#102e6b" />
+      </linearGradient>
+      <linearGradient id={`gold-${uid}`} x1="100" y1="20" x2="100" y2="230" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ffe071" />
+        <stop offset="0.5" stop-color="#fbc23f" />
+        <stop offset="1" stop-color="#ef9d1e" />
+      </linearGradient>
+      <linearGradient id={`goldL-${uid}`} x1="100" y1="80" x2="100" y2="192" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ffe893" />
+        <stop offset="0.55" stop-color="#fdbd34" />
+        <stop offset="1" stop-color="#f1971b" />
       </linearGradient>
     </defs>
 
-    <!-- shield body -->
-    <path
-      d="M20 6 H80 A12 12 0 0 1 92 18 V54 C92 78 74 96 50 106 C26 96 8 78 8 54 V18 A12 12 0 0 1 20 6 Z"
-      fill={`url(#shield-${uid})`}
-      stroke={`url(#gold-${uid})`}
-      stroke-width="3"
-    />
-    <!-- inner hairline -->
-    <path
-      d="M22 13 H78 A7 7 0 0 1 85 20 V54 C85 75 69 91 50 100 C31 91 15 75 15 54 V20 A7 7 0 0 1 22 13 Z"
-      stroke="oklch(0.82 0.14 82 / 0.55)"
-      stroke-width="1"
-    />
+    <!-- shield gold rim + blue body + inner hairline -->
+    <path d="M30 54 L170 54 Q178 54 178 62 L178 148 C178 192 150 214 100 228 C50 214 22 192 22 148 L22 62 Q22 54 30 54 Z" fill={`url(#gold-${uid})`} />
+    <path d="M35 61 L165 61 Q172 61 172 68 L172 148 C172 187 146 207 100 220 C54 207 28 187 28 148 L28 68 Q28 61 35 61 Z" fill={`url(#blue-${uid})`} />
+    <path d="M40 67 L160 67 Q166 67 166 73 L166 148 C166 183 142 201 100 213 C58 201 34 183 34 148 L34 73 Q34 67 40 67 Z" fill="none" stroke="#ffd86b" stroke-width="1.4" opacity="0.7" />
 
-    <!-- minimal skyline -->
-    <g fill={`url(#gold-${uid})`}>
-      <rect x="34" y="30" width="5" height="11" rx="0.6" />
-      <rect x="40.5" y="25" width="4" height="16" rx="0.6" />
-      <rect x="46" y="32" width="5" height="9" rx="0.6" />
-      <rect x="52.5" y="27" width="4" height="14" rx="0.6" />
-      <rect x="58" y="33" width="5" height="8" rx="0.6" />
+    <!-- skyline -->
+    <g stroke="#0c2455" stroke-width="1.4" stroke-linejoin="round">
+      <g fill={`url(#gold-${uid})`}>
+        {teeth.map((t) => (
+          <rect x={t.x} y={t.y} width="6" height="6" rx="1" transform={`rotate(${t.rot} ${t.cx} ${t.cy})`} />
+        ))}
+        <circle cx="131" cy="46" r="12.5" />
+      </g>
+      <circle cx="131" cy="46" r="5.2" fill={`url(#hole-${uid})`} />
+      <rect x="101" y="27" width="13" height="35" rx="1.5" fill={`url(#gold-${uid})`} />
+      <rect x="87" y="39" width="13" height="23" rx="1.5" fill={`url(#gold-${uid})`} />
+      <path d="M44 44 C52 28 78 28 86 44 Z" fill={`url(#gold-${uid})`} />
+      <rect x="46" y="43" width="38" height="4" rx="1" fill={`url(#gold-${uid})`} />
+      <rect x="48" y="46" width="34" height="16" rx="1.5" fill={`url(#gold-${uid})`} />
     </g>
-    <rect x="33" y="43" width="34" height="1.4" rx="0.7" fill="oklch(0.82 0.14 82 / 0.85)" />
+    <g fill={`url(#hole-${uid})`}>
+      <path d="M51 62 L51 54 a4 4 0 0 1 8 0 L59 62 Z" />
+      <path d="M61 62 L61 54 a4 4 0 0 1 8 0 L69 62 Z" />
+      <path d="M71 62 L71 54 a4 4 0 0 1 8 0 L79 62 Z" />
+      <rect x="104" y="33" width="7" height="2.4" />
+      <rect x="104" y="39" width="7" height="2.4" />
+      <rect x="104" y="45" width="7" height="2.4" />
+      <rect x="90" y="44" width="7" height="2.4" />
+      <rect x="90" y="50" width="7" height="2.4" />
+    </g>
 
-    <!-- BJ monogram -->
-    <text
-      x="50"
-      y="83"
-      text-anchor="middle"
-      font-family="'Libre Bodoni', Georgia, serif"
-      font-weight="700"
-      font-size="34"
-      letter-spacing="-2"
-      fill={`url(#gold-${uid})`}
-    >BJ</text>
+    <!-- B (behind) -->
+    <path d="M52 84 L104 84 C119 84 129 94 129 107 C129 118 122 125 112 128 C124 131 134 140 134 156 C134 173 122 188 103 188 L52 188 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
+    <path d="M74 95 L96 95 C104 95 109 100 109 107 C109 114 104 119 96 119 L74 119 Z" fill={`url(#hole-${uid})`} />
+    <path d="M74 147 L98 147 C107 147 113 153 113 161 C113 169 107 175 98 175 L74 175 Z" fill={`url(#hole-${uid})`} />
+    <!-- J (front; bar over B, hook curls under) -->
+    <path d="M112 82 L152 82 L152 156 C152 175 139 188 121 188 C107 188 98 181 95 170 L113 165 C114 171 118 174 123 173 C129 172 132 167 132 159 L132 100 L112 100 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
+
+    <!-- hammer -->
+    <g transform="rotate(-46 134 132)" stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" fill={`url(#gold-${uid})`}>
+      <rect x="108" y="128" width="46" height="8" rx="2.5" />
+      <rect x="150" y="119" width="13" height="26" rx="2.5" />
+    </g>
   </svg>
 
   {showWordmark && (
@@ -81,14 +107,14 @@ const uid = Math.random().toString(36).slice(2, 8);
   .logo {
     display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.6rem;
     line-height: 1;
   }
   .logo__mark {
-    width: clamp(2.1rem, 1.8rem + 1vw, 2.6rem);
+    width: clamp(1.95rem, 1.6rem + 1vw, 2.4rem);
     height: auto;
     flex: none;
-    filter: drop-shadow(0 4px 10px oklch(0.2 0.04 258 / 0.18));
+    filter: drop-shadow(0 4px 10px oklch(0.2 0.04 258 / 0.22));
   }
   .logo__word {
     display: flex;

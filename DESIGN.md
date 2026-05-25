@@ -53,9 +53,14 @@ Tinted neutrals toward the navy hue; never pure #000 / #fff.
 
 ## Logo
 
-Recreated as a clean SVG: navy shield, gold rim, a minimal gold skyline motif,
-gold "BJ" monogram. Pairs with a "BIG JADDY / EVENT CENTER" wordmark.
-Replace with the official transparent file when available.
+Faithful SVG recreation of the real logo: royal-blue shield with a gold rim and
+inner hairline, the skyline breaking the top edge (rotunda + arcade, two towers,
+a gear), the interlocked gold "BJ" monogram, and the hammer over the J. Colors
+are self-contained (royal blue #2c63cc→#15397f, gold #ffe071→#ef9d1e) so the
+mark reads on any background. Pairs with a "BIG JADDY / EVENT CENTER" wordmark
+whose color flips (white over the hero, navy on the solid header). The favicon
+is a simplified shield + BJ for legibility at tiny sizes. Swap in the official
+vector if one becomes available.
 
 ## Motion
 

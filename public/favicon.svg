@@ -1,23 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110" width="100" height="110">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 232" width="200" height="232">
   <defs>
-    <linearGradient id="s" x1="50" y1="6" x2="50" y2="106" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#39466a"/>
-      <stop offset="1" stop-color="#1a2236"/>
+    <linearGradient id="b" x1="100" y1="50" x2="100" y2="228" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2c63cc"/><stop offset="1" stop-color="#15397f"/>
     </linearGradient>
-    <linearGradient id="g" x1="50" y1="14" x2="50" y2="96" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffd86b"/>
-      <stop offset="0.5" stop-color="#f5b53a"/>
-      <stop offset="1" stop-color="#cf8f23"/>
+    <linearGradient id="h" x1="100" y1="80" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#173b86"/><stop offset="1" stop-color="#102e6b"/>
+    </linearGradient>
+    <linearGradient id="g" x1="100" y1="20" x2="100" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe071"/><stop offset="0.5" stop-color="#fbc23f"/><stop offset="1" stop-color="#ef9d1e"/>
+    </linearGradient>
+    <linearGradient id="gl" x1="100" y1="70" x2="100" y2="195" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe893"/><stop offset="0.55" stop-color="#fdbd34"/><stop offset="1" stop-color="#f1971b"/>
     </linearGradient>
   </defs>
-  <path d="M20 6 H80 A12 12 0 0 1 92 18 V54 C92 78 74 96 50 106 C26 96 8 78 8 54 V18 A12 12 0 0 1 20 6 Z" fill="url(#s)" stroke="url(#g)" stroke-width="3"/>
-  <g fill="url(#g)">
-    <rect x="34" y="30" width="5" height="11" rx="0.6"/>
-    <rect x="40.5" y="25" width="4" height="16" rx="0.6"/>
-    <rect x="46" y="32" width="5" height="9" rx="0.6"/>
-    <rect x="52.5" y="27" width="4" height="14" rx="0.6"/>
-    <rect x="58" y="33" width="5" height="8" rx="0.6"/>
-  </g>
-  <rect x="33" y="43" width="34" height="1.4" rx="0.7" fill="#f5b53a"/>
-  <text x="50" y="83" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="34" letter-spacing="-2" fill="url(#g)">BJ</text>
+  <path d="M30 44 L170 44 Q180 44 180 54 L180 150 C180 196 150 218 100 232 C50 218 20 196 20 150 L20 54 Q20 44 30 44 Z" fill="url(#g)"/>
+  <path d="M36 52 L164 52 Q172 52 172 60 L172 150 C172 190 146 210 100 223 C54 210 28 190 28 150 L28 60 Q28 52 36 52 Z" fill="url(#b)"/>
+  <!-- B -->
+  <path d="M50 80 L106 80 C122 80 133 91 133 105 C133 117 125 125 114 128 C127 131 138 141 138 158 C138 176 125 192 105 192 L50 192 Z" fill="url(#gl)" stroke="#0c2455" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M73 92 L97 92 C106 92 111 98 111 105 C111 113 106 118 97 118 L73 118 Z" fill="url(#h)"/>
+  <path d="M73 148 L99 148 C109 148 115 154 115 163 C115 171 109 178 99 178 L73 178 Z" fill="url(#h)"/>
+  <!-- J -->
+  <path d="M114 78 L156 78 L156 158 C156 178 142 192 123 192 C108 192 99 184 96 173 L115 168 C116 174 120 177 126 176 C132 174 135 169 135 161 L135 96 L114 96 Z" fill="url(#gl)" stroke="#0c2455" stroke-width="2.6" stroke-linejoin="round"/>
 </svg>
