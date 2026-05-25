@@ -81,17 +81,17 @@ const teeth = Array.from({ length: 8 }, (_, i) => {
       <rect x="90" y="50" width="7" height="2.4" />
     </g>
 
-    <!-- B (behind) -->
-    <path d="M52 84 L104 84 C119 84 129 94 129 107 C129 118 122 125 112 128 C124 131 134 140 134 156 C134 173 122 188 103 188 L52 188 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
-    <path d="M74 95 L96 95 C104 95 109 100 109 107 C109 114 104 119 96 119 L74 119 Z" fill={`url(#hole-${uid})`} />
-    <path d="M74 147 L98 147 C107 147 113 153 113 161 C113 169 107 175 98 175 L74 175 Z" fill={`url(#hole-${uid})`} />
-    <!-- J (front; bar over B, hook curls under) -->
-    <path d="M112 82 L152 82 L152 156 C152 175 139 188 121 188 C107 188 98 181 95 170 L113 165 C114 171 118 174 123 173 C129 172 132 167 132 159 L132 100 L112 100 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
+    <!-- B (smooth, full bowls) -->
+    <path d="M47 84 L95 84 C117 84 131 93 131 108 C131 121 122 128 110 130 C123 132 135 141 135 158 C135 176 121 189 99 189 L47 189 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
+    <path d="M69 95 C84 95 92 95 95 96 C103 99 107 103 107 109 C107 115 103 119 95 121 C92 122 84 121 69 121 Z" fill={`url(#hole-${uid})`} />
+    <path d="M69 146 C86 146 95 146 98 147 C107 150 112 155 112 162 C112 169 107 174 98 177 C95 178 86 177 69 177 Z" fill={`url(#hole-${uid})`} />
+    <!-- J (spaced from B, smooth hook) -->
+    <path d="M128 84 L153 84 C156 84 158 86 158 89 L158 154 C158 175 143 190 123 190 C110 190 100 183 97 171 L116 166 C117 172 121 176 127 175 C133 174 137 169 137 160 L137 98 L128 98 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
 
-    <!-- hammer -->
-    <g transform="rotate(-46 134 132)" stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" fill={`url(#gold-${uid})`}>
-      <rect x="108" y="128" width="46" height="8" rx="2.5" />
-      <rect x="150" y="119" width="13" height="26" rx="2.5" />
+    <!-- hammer over the J -->
+    <g transform="rotate(-46 146 130)" stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" fill={`url(#gold-${uid})`}>
+      <rect x="120" y="126" width="46" height="8" rx="3" />
+      <rect x="162" y="116" width="13" height="28" rx="3" />
     </g>
   </svg>
 
