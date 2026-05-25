@@ -265,6 +265,7 @@ const eventTypes = [
   .field {
     display: grid;
     gap: 0.4rem;
+    min-width: 0; /* let grid items shrink so inputs never overflow */
   }
   .field-row {
     display: grid;
@@ -291,7 +292,21 @@ const eventTypes = [
     border-radius: 10px;
     padding: 0.7rem 0.85rem;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  /* iOS gives date/time inputs a fixed intrinsic width; normalize so they
+     fill the column and shrink with it instead of overflowing */
+  .field input[type="date"],
+  .field input[type="time"] {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    height: calc(1.6em + 1.4rem + 2px); /* match text inputs' height */
+  }
+  .field input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
   }
   .field textarea {
     resize: vertical;
