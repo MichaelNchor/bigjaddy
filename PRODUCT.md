@@ -60,5 +60,6 @@ Achimota, Kingsby, adjacent Hof Vilac International School, Accra, Ghana.
 
 ## Open items (placeholders to replace before launch)
 
-- Phone number, email, exact opening hours, social handles.
+- Email, exact opening hours, social handles. (Phone / WhatsApp is set:
+  +233 24 508 0252.)
 - Official transparent logo file (current site uses a recreated SVG mark).
