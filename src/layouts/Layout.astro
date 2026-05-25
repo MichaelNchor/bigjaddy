@@ -77,16 +77,22 @@ const {
       // Mobile nav toggle
       const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
       const nav = document.querySelector<HTMLElement>("#primary-nav");
+      const backdrop = document.querySelector<HTMLElement>(".nav-backdrop");
+      const setMenu = (open: boolean) => {
+        header?.classList.toggle("nav-open", open);
+        navToggle?.setAttribute("aria-expanded", String(open));
+        document.body.style.overflow = open ? "hidden" : "";
+      };
       navToggle?.addEventListener("click", () => {
-        const open = header?.classList.toggle("nav-open");
-        navToggle.setAttribute("aria-expanded", String(!!open));
+        setMenu(!header?.classList.contains("nav-open"));
       });
+      backdrop?.addEventListener("click", () => setMenu(false));
       nav?.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          header?.classList.remove("nav-open");
-          navToggle?.setAttribute("aria-expanded", "false");
-        })
+        a.addEventListener("click", () => setMenu(false))
       );
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setMenu(false);
+      });
     </script>
 
     <style>

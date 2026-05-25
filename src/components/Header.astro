@@ -25,6 +25,7 @@ const links = [
 
     <button
       class="nav-toggle"
+      type="button"
       aria-label="Toggle menu"
       aria-controls="primary-nav"
       aria-expanded="false"
@@ -32,6 +33,7 @@ const links = [
       <span></span><span></span><span></span>
     </button>
   </div>
+  <div class="nav-backdrop"></div>
 </header>
 
 <style>
@@ -104,6 +106,8 @@ const links = [
 
   .nav-toggle {
     display: none;
+    position: relative;
+    z-index: 120; /* stays tappable above the open drawer */
     flex-direction: column;
     gap: 5px;
     width: 44px;
@@ -112,6 +116,25 @@ const links = [
     justify-content: center;
     background: transparent;
     border: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* dim backdrop behind the open drawer */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 105;
+    background: oklch(0.1 0.03 258 / 0.55);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.38s var(--ease-out), visibility 0.38s;
+  }
+  .site-header.nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   .nav-toggle span {
     width: 24px;
@@ -132,6 +155,7 @@ const links = [
     .nav {
       position: fixed;
       inset: 0 0 0 auto;
+      z-index: 110;
       width: min(82vw, 340px);
       flex-direction: column;
       align-items: flex-start;
@@ -140,8 +164,9 @@ const links = [
       padding: 2rem clamp(1.5rem, 5vw, 2.5rem);
       background: var(--navy-900);
       transform: translateX(100%);
-      transition: transform 0.5s var(--ease-out);
+      transition: transform 0.38s var(--ease-out);
       box-shadow: -30px 0 60px -30px oklch(0.1 0.03 258 / 0.6);
+      overflow-y: auto;
     }
     .nav ul {
       flex-direction: column;
