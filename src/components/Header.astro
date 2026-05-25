@@ -41,8 +41,25 @@ const links = [
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 100;
+  }
+  /* the solid background + blur live on a pseudo-element so the header itself
+     never becomes a containing block for the fixed drawer (backdrop-filter on
+     the element would trap position:fixed children inside the header bar) */
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: transparent;
     transition: background-color 0.4s ease, box-shadow 0.4s ease,
-      backdrop-filter 0.4s ease;
+      backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+    pointer-events: none;
+  }
+  .site-header.is-solid::before {
+    background: oklch(0.976 0.008 85 / 0.92);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    backdrop-filter: saturate(140%) blur(12px);
+    box-shadow: 0 1px 0 var(--line), 0 10px 30px -20px oklch(0.2 0.04 258 / 0.4);
   }
   .site-header__inner {
     display: flex;
@@ -50,13 +67,6 @@ const links = [
     justify-content: space-between;
     gap: 2rem;
     padding-block: clamp(0.85rem, 0.6rem + 0.8vw, 1.25rem);
-  }
-
-  /* solid state when scrolled */
-  .site-header.is-solid {
-    background: oklch(0.976 0.008 85 / 0.92);
-    backdrop-filter: saturate(140%) blur(12px);
-    box-shadow: 0 1px 0 var(--line), 0 10px 30px -20px oklch(0.2 0.04 258 / 0.4);
   }
 
   .nav {
