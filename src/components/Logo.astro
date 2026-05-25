@@ -1,8 +1,8 @@
 ---
 /**
- * BIG JADDY mark — faithful SVG recreation of the real logo: royal-blue shield
- * with gold rim, skyline (rotunda + arcade, towers, gear), the gold "BJ"
- * monogram, and the hammer. Self-contained colors so it reads on any background.
+ * BIG JADDY mark — the official logo (public/logo.png), transparent PNG.
+ * Pairs with the "BIG JADDY / EVENT CENTER" wordmark; the wordmark text color
+ * flips (white over the hero, navy on the solid header).
  */
 interface Props {
   variant?: "light" | "dark"; // controls only the wordmark text color
@@ -10,90 +10,17 @@ interface Props {
   class?: string;
 }
 const { variant = "light", showWordmark = true, class: klass = "" } = Astro.props;
-const uid = Math.random().toString(36).slice(2, 8);
-
-// 8 gear teeth around (131,46)
-const teeth = Array.from({ length: 8 }, (_, i) => {
-  const a = (i * 45 * Math.PI) / 180;
-  const cx = 131 + Math.cos(a) * 12;
-  const cy = 46 + Math.sin(a) * 12;
-  return {
-    x: +(cx - 3).toFixed(1),
-    y: +(cy - 3).toFixed(1),
-    cx: +cx.toFixed(1),
-    cy: +cy.toFixed(1),
-    rot: i * 45,
-  };
-});
 ---
 
 <a href="#top" class={`logo ${klass}`} data-variant={variant} aria-label="BIG JADDY Event Center, home">
-  <svg class="logo__mark" viewBox="0 0 200 232" role="img" aria-hidden="true">
-    <defs>
-      <linearGradient id={`blue-${uid}`} x1="100" y1="50" x2="100" y2="228" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#2c63cc" />
-        <stop offset="1" stop-color="#15397f" />
-      </linearGradient>
-      <linearGradient id={`hole-${uid}`} x1="100" y1="80" x2="100" y2="200" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#173b86" />
-        <stop offset="1" stop-color="#102e6b" />
-      </linearGradient>
-      <linearGradient id={`gold-${uid}`} x1="100" y1="20" x2="100" y2="230" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#ffe071" />
-        <stop offset="0.5" stop-color="#fbc23f" />
-        <stop offset="1" stop-color="#ef9d1e" />
-      </linearGradient>
-      <linearGradient id={`goldL-${uid}`} x1="100" y1="80" x2="100" y2="192" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#ffe893" />
-        <stop offset="0.55" stop-color="#fdbd34" />
-        <stop offset="1" stop-color="#f1971b" />
-      </linearGradient>
-    </defs>
-
-    <!-- shield gold rim + blue body + inner hairline -->
-    <path d="M30 54 L170 54 Q178 54 178 62 L178 148 C178 192 150 214 100 228 C50 214 22 192 22 148 L22 62 Q22 54 30 54 Z" fill={`url(#gold-${uid})`} />
-    <path d="M35 61 L165 61 Q172 61 172 68 L172 148 C172 187 146 207 100 220 C54 207 28 187 28 148 L28 68 Q28 61 35 61 Z" fill={`url(#blue-${uid})`} />
-    <path d="M40 67 L160 67 Q166 67 166 73 L166 148 C166 183 142 201 100 213 C58 201 34 183 34 148 L34 73 Q34 67 40 67 Z" fill="none" stroke="#ffd86b" stroke-width="1.4" opacity="0.7" />
-
-    <!-- skyline -->
-    <g stroke="#0c2455" stroke-width="1.4" stroke-linejoin="round">
-      <g fill={`url(#gold-${uid})`}>
-        {teeth.map((t) => (
-          <rect x={t.x} y={t.y} width="6" height="6" rx="1" transform={`rotate(${t.rot} ${t.cx} ${t.cy})`} />
-        ))}
-        <circle cx="131" cy="46" r="12.5" />
-      </g>
-      <circle cx="131" cy="46" r="5.2" fill={`url(#hole-${uid})`} />
-      <rect x="101" y="27" width="13" height="35" rx="1.5" fill={`url(#gold-${uid})`} />
-      <rect x="87" y="39" width="13" height="23" rx="1.5" fill={`url(#gold-${uid})`} />
-      <path d="M44 44 C52 28 78 28 86 44 Z" fill={`url(#gold-${uid})`} />
-      <rect x="46" y="43" width="38" height="4" rx="1" fill={`url(#gold-${uid})`} />
-      <rect x="48" y="46" width="34" height="16" rx="1.5" fill={`url(#gold-${uid})`} />
-    </g>
-    <g fill={`url(#hole-${uid})`}>
-      <path d="M51 62 L51 54 a4 4 0 0 1 8 0 L59 62 Z" />
-      <path d="M61 62 L61 54 a4 4 0 0 1 8 0 L69 62 Z" />
-      <path d="M71 62 L71 54 a4 4 0 0 1 8 0 L79 62 Z" />
-      <rect x="104" y="33" width="7" height="2.4" />
-      <rect x="104" y="39" width="7" height="2.4" />
-      <rect x="104" y="45" width="7" height="2.4" />
-      <rect x="90" y="44" width="7" height="2.4" />
-      <rect x="90" y="50" width="7" height="2.4" />
-    </g>
-
-    <!-- B (smooth, full bowls) -->
-    <path d="M47 84 L95 84 C117 84 131 93 131 108 C131 121 122 128 110 130 C123 132 135 141 135 158 C135 176 121 189 99 189 L47 189 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
-    <path d="M69 95 C84 95 92 95 95 96 C103 99 107 103 107 109 C107 115 103 119 95 121 C92 122 84 121 69 121 Z" fill={`url(#hole-${uid})`} />
-    <path d="M69 146 C86 146 95 146 98 147 C107 150 112 155 112 162 C112 169 107 174 98 177 C95 178 86 177 69 177 Z" fill={`url(#hole-${uid})`} />
-    <!-- J (spaced from B, smooth hook) -->
-    <path d="M128 84 L153 84 C156 84 158 86 158 89 L158 154 C158 175 143 190 123 190 C110 190 100 183 97 171 L116 166 C117 172 121 176 127 175 C133 174 137 169 137 160 L137 98 L128 98 Z" fill={`url(#goldL-${uid})`} stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" />
-
-    <!-- hammer over the J -->
-    <g transform="rotate(-46 146 130)" stroke="#0c2455" stroke-width="2.4" stroke-linejoin="round" fill={`url(#gold-${uid})`}>
-      <rect x="120" y="126" width="46" height="8" rx="3" />
-      <rect x="162" y="116" width="13" height="28" rx="3" />
-    </g>
-  </svg>
+  <img
+    class="logo__mark"
+    src="/logo.png"
+    alt="BIG JADDY Event Center logo"
+    width="864"
+    height="1000"
+    decoding="async"
+  />
 
   {showWordmark && (
     <span class="logo__word">
@@ -111,10 +38,10 @@ const teeth = Array.from({ length: 8 }, (_, i) => {
     line-height: 1;
   }
   .logo__mark {
-    width: clamp(1.95rem, 1.6rem + 1vw, 2.4rem);
-    height: auto;
+    width: auto;
+    height: clamp(2.5rem, 2.1rem + 1.4vw, 3.2rem);
     flex: none;
-    filter: drop-shadow(0 4px 10px oklch(0.2 0.04 258 / 0.22));
+    filter: drop-shadow(0 4px 12px oklch(0.2 0.04 258 / 0.28));
   }
   .logo__word {
     display: flex;
