@@ -10,10 +10,9 @@ interface Props {
 }
 const { variant = "light", showWordmark = true, class: klass = "" } = Astro.props;
 const uid = Math.random().toString(36).slice(2, 8);
-const wordmarkColor = variant === "dark" ? "var(--on-navy)" : "var(--navy-800)";
 ---
 
-<a href="#top" class={`logo ${klass}`} aria-label="BIG JADDY Event Center, home">
+<a href="#top" class={`logo ${klass}`} data-variant={variant} aria-label="BIG JADDY Event Center, home">
   <svg
     class="logo__mark"
     viewBox="0 0 100 110"
@@ -71,7 +70,7 @@ const wordmarkColor = variant === "dark" ? "var(--on-navy)" : "var(--navy-800)";
   </svg>
 
   {showWordmark && (
-    <span class="logo__word" style={`color:${wordmarkColor}`}>
+    <span class="logo__word">
       <span class="logo__name">BIG JADDY</span>
       <span class="logo__sub">Event Center</span>
     </span>
@@ -102,6 +101,15 @@ const wordmarkColor = variant === "dark" ? "var(--on-navy)" : "var(--navy-800)";
     font-size: clamp(1rem, 0.92rem + 0.4vw, 1.2rem);
     letter-spacing: 0.02em;
     line-height: 0.95;
+    color: var(--on-navy);
+    transition: color 0.3s ease;
+  }
+  .logo[data-variant="light"] .logo__name {
+    color: var(--navy-900);
+  }
+  /* when the fixed header turns solid over light content, flip to ink */
+  :global(.site-header.is-solid) .logo__name {
+    color: var(--navy-900);
   }
   .logo__sub {
     font-family: var(--font-body);
