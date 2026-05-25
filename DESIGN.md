@@ -31,10 +31,11 @@ Tinted neutrals toward the navy hue; never pure #000 / #fff.
 
 ## Typography
 
-- **Display:** Bodoni Moda (high-contrast Didone). Hero word, section titles,
-  the gold italic "Grand." accent. Weights 400–900. Grand, modern, not the
-  Playfair/Cinzel wedding reflex. The hero headline runs at weight 800 (not 600)
-  so its hairline strokes stay visible at a distance; section titles use 700.
+- **Display:** Libre Bodoni (Bodoni revival, Didone). Hero word, section titles,
+  the gold italic "Grand." accent. Weights 400–700. Same elegant Bodoni
+  character as Bodoni Moda but with sturdier strokes that stay legible at a
+  distance (Bodoni Moda's optical hairlines receded on the hero). Hero headline
+  runs at weight 700; section titles 700. Not the Playfair/Cinzel wedding reflex.
 - **Body / UI:** Hanken Grotesk. All running text, nav, labels, buttons. Warm,
   legible grotesque. Weights 300–800.
 - Two families, deliberately. Display serif + sans body = the luxury/editorial
